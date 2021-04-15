@@ -1,4 +1,4 @@
-# DIC_dictionary
+# DIC词典说明
 <a href="http://www.loser.host/">进入下载网站</a>
 <h1>0.3.5更新</h1>
 增加模糊搜索<br>
