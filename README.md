@@ -1,2 +1,2 @@
 # DIC_dictionary
-<a href="www.loser.host">网站</a>
+<a href="http://www.loser.host/">网站</a>
