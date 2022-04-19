@@ -8,6 +8,7 @@ SOURCES += \
         main.cpp \
         searchword.cpp \
         word.cpp \
+        wordbooks.cpp \
         wordfilesystem.cpp
 
 
@@ -30,4 +31,5 @@ DISTFILES += \
 HEADERS += \
     searchword.h \
     word.h \
+    wordbooks.h \
     wordfilesystem.h

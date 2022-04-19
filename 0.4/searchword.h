@@ -22,23 +22,26 @@ class SearchWord:public QObject
 
 public:
     SearchWord();
-
+    ~SearchWord();
 //信号
 signals:
 
 //槽函数
 public slots:
      QString search(QString word,int index,QString type);
+     QString search(QString word,QString type);
      int getcount();
 
 
 private:
 
     int _max_check=0;
-    QVector<Word>check;  //查找结果寄存器
+    QVector<Word>_check;  //查找结果寄存器
     QVector<Word> _list;//单词列表
-
+    WordFileSystem *_wordfilesystem;
 
 };
+
+
 
 #endif // SEARCHWORD_H

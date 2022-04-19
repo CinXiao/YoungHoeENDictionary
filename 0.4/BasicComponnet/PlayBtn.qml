@@ -1,5 +1,5 @@
 import QtQuick 2.9
-
+import QtMultimedia 5.9
 
 Rectangle
 {
@@ -7,8 +7,13 @@ Rectangle
         width: 25
         height:25
         radius:5
-        anchors.horizontalCenter: parent.horizontalCenter
-
+        property int type:1
+        property string audio:"test"
+        MediaPlayer
+        {
+            id:player
+            source: "http://dict.youdao.com/dictvoice?audio="+audio+"&type="+type
+        }
         Behavior on color
         {
             ColorAnimation {
@@ -26,18 +31,22 @@ Rectangle
             MouseArea{
 
             anchors.fill: parent
-            onClicked:
-            {
 
-                player.play()
-            }
             hoverEnabled: true
             onEntered:
             {
+
+                if(type===4)
+                {
+                 player.source="https://ssl.gstatic.com/dictionary/static/sounds/oxford/"+audio+"--_gb_1.mp3"
+                 player.play()
+                }else
+                player.play()
                 playbtn.color="#cccccc"
             }
             onExited:
             {
+                player.stop();
             playbtn.color="#ffffff"
             }
 

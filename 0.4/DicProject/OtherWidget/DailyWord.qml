@@ -1,18 +1,11 @@
 import QtQuick 2.9
-import QtMultimedia 5.9
+
 import "../../BasicComponnet"
 Item {
     width: 250
     height:150
 
 
-    MediaPlayer
-    {
-        id:player
-        source: "http://dict.youdao.com/dictvoice?audio="+english.text+"&type=1"
-
-
-    }
 
     Column{
         width:parent.width
@@ -38,7 +31,8 @@ Item {
 
     PlayBtn
     {
-
+        anchors.horizontalCenter: parent.horizontalCenter
+        audio: english.text
 
     }
 

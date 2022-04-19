@@ -1,38 +1,94 @@
 #include "searchword.h"
 
+SearchWord::~SearchWord()
+{
+    delete _wordfilesystem;
+}
+
 
 SearchWord::SearchWord()
 {
 
 
-    WordFileSystem wordfile("WordList/CET-4 EASY.xml");
+_wordfilesystem=new WordFileSystem("WordList/CET-4 EASY.xml");
 
-    std::copy()
-    QVector<Word> temp=wordfile.getwordlist();
+    _list=_wordfilesystem->getwordlist();
+
 
 
 }
+
+
+
  int SearchWord::getcount()
  {
 
 
 
+     if(_max_check>=7)return 7;
      return _max_check;
  }
 
+
+QString SearchWord::search(QString word,QString type)
+{
+
+
+  auto finder=_check.begin();
+
+  while(finder!=_check.end())
+  {
+
+      if(finder->_word==word)
+      {
+          if(type=="word")
+          {
+              return finder->_word;
+          }
+          else if(type=="trans")
+          {
+               return finder->_trans;
+          }else if(type=="phonetic")
+          {
+
+              return finder->_phonetic;
+
+          }
+          else if(type=="tags")
+          {
+
+              return finder->_tags;
+          }else if(type=="progress")
+          {
+              return QString::number(finder->_progress);
+
+          }else
+          {
+
+              return "搜索类型错误";
+          }
+
+      }
+      ++finder;
+  }
+
+
+
+  return "NAN";
+
+}
 
 QString SearchWord::search(QString word,int index,QString type)//目标单词
 {
 
 
 
-   qDebug()<<_list[0]._word;
 
-    return "test";
 
-    check.clear();//清空寄存列表
+
+
+    _check.clear();//清空寄存列表
     _max_check=0;
-
 
 
     //迭代器迭代list，模糊查找目标
@@ -42,36 +98,36 @@ QString SearchWord::search(QString word,int index,QString type)//目标单词
         if(finder->_word.contains(word))
         {
             _max_check++;
-            if(_max_check<7)
-             check<<*finder;//录入指定单词到寄存器
+             _check<<*finder;//录入指定单词到寄存器
         }
         finder++;
     }
-
-
     if(word=="")return "字段为空";
-    if(index>=_max_check)return "索引越界";
+    if(index>=_max_check)return "*";
     if(_max_check==0)return "找不到数据";
+
+
 
     if(type=="word")
     {
-        return check[index]._word;
-    }else if(type=="trans")
+        return _check[index]._word;
+    }
+    else if(type=="trans")
     {
-         return check[index]._trans;
-    }else if(type=="_phonetic")
+         return _check[index]._trans;
+    }else if(type=="phonetic")
     {
 
-        return check[index]._phonetic;
+        return _check[index]._phonetic;
 
     }
-    else if(type=="_tags")
+    else if(type=="tags")
     {
 
-        return check[index]._tags;
+        return _check[index]._tags;
     }else if(type=="progress")
     {
-        return QString::number(check[index]._progress);
+        return QString::number(_check[index]._progress);
 
     }else
     {

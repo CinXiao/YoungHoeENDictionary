@@ -2,8 +2,12 @@ import QtQuick 2.9
 import Searchword 1.0
 import "../OtherWidget"
 import "../../BasicComponnet"
+
 Item
 {
+
+
+    //property bool isitem:false//是否还有下拉选项
 
     //搜索核心算法模块
     SearchCore
@@ -12,6 +16,7 @@ Item
     }
 
 
+  //  property bool : value
 
     anchors.fill: parent
     /**
@@ -30,13 +35,45 @@ Item
         TextInput
         {
 
+
             selectByMouse: true
             height:35
             id:input
             font.family: "微软雅黑"
             font.pixelSize: 20
 
-             anchors
+
+
+            Keys.onPressed:
+            {
+                switch(event.key)
+                 {
+                   case Qt.Key_Enter:
+                   {
+                     input.focus=false;
+                       list_background.height=0;
+                   }break;
+                   case Qt.Key_Return:
+                   {
+                     input.focus=false;
+                       list_background.height=0;
+                   }break;
+                   case Qt.Key_Up:
+                   {
+
+                       //选择
+                       //input.text=m.count
+                   }break;
+                   case Qt.Key_Down:
+                   {
+                        //input.text=m.count
+
+                   }break;
+                }
+
+
+            }
+            anchors
             {
             fill:parent
             margins:10
@@ -44,13 +81,16 @@ Item
              onTextChanged:
              {
 
-               finder.search(input.text,0,"word")
-               console.log(finder.getcount())
-
+                finder.search(input.text,0,"word")
+                wordmodel.word=finder.search(input.text,"word")
+                wordmodel.phonetic=finder.search(input.text,"phonetic")
+                wordmodel.trans=finder.search(input.text,"trans")
+                input.copy();
                 list_background.height=(input.length!=0)?finder.getcount()*30:0
                 input_background.height=(input.length!=0)?40:100
                 defaultmodel.visible=(input.length!=0)?false:true
                 wordmodel.visible=(input.length!=0)?true:false
+
              }
         }
         anchors
@@ -86,7 +126,8 @@ Item
         }
         onClicked:
         {
-        list_background.height=0
+            input.focus=false
+            list_background.height=0
         }
 
     }
@@ -117,14 +158,14 @@ Item
    ListModel
    {
        id:m
-     ListElement{w:"A";e:"n.测试"}
-     ListElement{w:"B";e:"n.测试"}
-     ListElement{w:"C";e:"n.测试"}
-     ListElement{w:"D";e:"n.测试"}
-     ListElement{w:"E";e:"n.测试"}
-     ListElement{w:"F";e:"n.测试"}
-     ListElement{w:"F";e:"n.测试"}
-     ListElement{w:"F";e:"n.测试"}
+     ListElement{w:"test"}
+     ListElement{}
+     ListElement{}
+     ListElement{}
+     ListElement{}
+     ListElement{}
+     ListElement{}
+     ListElement{}
    }
 
 
@@ -169,8 +210,6 @@ Item
         {
            input.text=word_text.text
            list_background.height=0
-           // console.log(input.text.toString())
-
         }
 
        }
@@ -234,6 +273,7 @@ Item
         //单词查询显示
        WordModel
         {
+
             anchors.fill: parent
             id:wordmodel
             visible: false

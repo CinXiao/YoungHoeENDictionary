@@ -38,7 +38,7 @@ Item {
          model:ListModel
          {
            ListElement{info:"邮箱地址:";t:"2256530727@qq.com"}
-           ListElement{info:"GitHub:";t:"暂时未开源"}
+           ListElement{info:"GitHub:";t:"/CinXiao/DIC_dictionary"}
 
          }
          delegate:Component
