@@ -4,6 +4,12 @@ WordFileSystem::WordFileSystem()
 {
 
 }
+
+    WordFileSystem::~WordFileSystem()
+    {
+
+
+    }
 WordFileSystem::WordFileSystem(QString file)
 {
 
@@ -15,7 +21,6 @@ WordFileSystem::WordFileSystem(QString file)
            //获取根节点
            QDomNode root=_dom.firstChild();
            QDomNode fristnode=root.firstChild();
-
            QDomNode temp=fristnode;
            int count=0;
            while(!temp.isNull())
@@ -29,14 +34,9 @@ WordFileSystem::WordFileSystem(QString file)
 
     }else
     {
-
-
         qDebug()<<"文件打开失败";
     }
-
-
-
-
+_file.close();
 }
 
  void WordFileSystem::Parsingnode(QDomNode node)
@@ -78,3 +78,9 @@ WordFileSystem::WordFileSystem(QString file)
     }
 
 
+
+int WordFileSystem:: count()
+{
+
+    return _wordlist.count();
+}

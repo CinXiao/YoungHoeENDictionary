@@ -8,13 +8,8 @@ SearchWord::~SearchWord()
 
 SearchWord::SearchWord()
 {
-
-
-_wordfilesystem=new WordFileSystem("WordList/CET-4 EASY.xml");
-
+    _wordfilesystem=new WordFileSystem("SystemWordBooks/Core.xml");
     _list=_wordfilesystem->getwordlist();
-
-
 
 }
 

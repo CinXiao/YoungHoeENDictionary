@@ -15,7 +15,11 @@ int main(int argc, char *argv[])
 
 
    qmlRegisterType<SearchWord>("Searchword",1,0,"SearchCore");   //单词查找模块
+
    qmlRegisterType<WordBooks>("WordBooks",1,0,"BookCore");      //单词书模块
+
+
+
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

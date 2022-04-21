@@ -5,6 +5,7 @@ QT += quick xml
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        getbookword.cpp \
         main.cpp \
         searchword.cpp \
         word.cpp \
@@ -29,6 +30,7 @@ DISTFILES += \
     Bug_List.txt
 
 HEADERS += \
+    getbookword.h \
     searchword.h \
     word.h \
     wordbooks.h \

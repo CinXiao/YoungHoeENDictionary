@@ -33,7 +33,7 @@ Rectangle
             font.pixelSize: 15
             font.family: "微软雅黑"
             color: "#ffffff"
-            text:"W"
+            text:"列表"
         }
 
 
@@ -73,7 +73,7 @@ Rectangle
                 font.pixelSize: 15
                 font.family: "微软雅黑"
                 color: "#000000"
-                 text: "W"
+                 text: "列表"
             }
             MouseArea
             {
@@ -110,7 +110,7 @@ Rectangle
                 font.pixelSize: 15
                 font.family: "微软雅黑"
                 color: "#000000"
-                 text: "R"
+                 text: "卡片"
 
             }
         }
@@ -127,7 +127,7 @@ Rectangle
              font.pixelSize: 15
              font.family: "微软雅黑"
              color: "#000000"
-               text: "T"
+               text: "矩块"
          }
          MouseArea
          {

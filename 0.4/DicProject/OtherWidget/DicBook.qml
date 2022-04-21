@@ -4,13 +4,14 @@ import "../../BasicComponnet"
 Item {
 
 
-
-    signal openbook(string name);
+    property alias color:book.color
+    property alias writer:writename.text
+    property alias name:bookname.text
+    property string path:""
+    signal openbook(string path);
     id:root
 
-    property alias color:book.color
-    property alias writename:writename.text
-    property alias bookname:bookname.text
+
     width: 150
     height:200
     DropShadow
@@ -59,7 +60,7 @@ Item {
             text:"System"
         }
 
-        //展开按钮
+        //打开按钮
         ShowAllButton
         {
 
@@ -70,7 +71,8 @@ Item {
 
             onClicked:
             {
-                openbook(bookname.text)
+                root.openbook(root.path)
+                console.log("clicked"+bookname.text)
             }
         }
 
