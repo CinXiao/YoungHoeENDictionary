@@ -9,7 +9,6 @@ public:
     Word(QString word, QString trans,QString phonetic="NULL",QString tags="NULL",int progress=-1);
 
     QString gettrans();
-
     QString _word;       //单词
     QString _trans;      //翻译
     QString _phonetic;   //音标

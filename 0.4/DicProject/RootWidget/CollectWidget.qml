@@ -8,6 +8,6 @@ Item
 
     Text {
 
-        text: qsTr("text")
+        text: "正在开发"
     }
 }

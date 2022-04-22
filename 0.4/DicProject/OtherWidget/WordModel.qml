@@ -7,18 +7,32 @@ Rectangle
     property alias word:word_text.text
     property alias phonetic: word_phonetic.text
     property alias trans:word_trans.text
+    property int sample: 20
+    property int shadowradiu: 11
+    property alias back: back
     anchors.fill: parent
+    MouseArea
+    {
 
+        hoverEnabled: true
+        anchors.fill: parent
+    onEntered:
+    {
+
+    }
+
+    }
 
     DropShadow
     {
      anchors.fill: word_rect
      color:"#cccccc"
-     samples: 20
-     radius:11
+     samples: samples
+     radius:shadowradiu
      source:word_rect
      horizontalOffset: 2
-    verticalOffset: 2
+        verticalOffset: 2
+        id:back
     }
 
         Rectangle
@@ -146,6 +160,7 @@ Rectangle
 
 
         }
+
 
 
 

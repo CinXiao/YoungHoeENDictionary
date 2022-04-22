@@ -43,10 +43,13 @@ void WordBooks::init()
 
         for(int i=0;i<filelist.count();++i)
         {
+
         QDomNode book=dom.createElement("Book");
         QDomNode bookname=dom.createElement("BookName");
         QFileInfo fileinfo(filelist[i]);
+         if(fileinfo.baseName()=="Core")break;
         bookname.appendChild(dom.createTextNode(fileinfo.baseName()));
+
         book.appendChild(bookname);
 
         QDomNode writername=dom.createElement("WriterName");

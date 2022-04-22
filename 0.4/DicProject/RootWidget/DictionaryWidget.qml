@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtGraphicalEffects 1.15
 import WordBooks 1.0
-
+import QtQuick.Controls 2.5
 import "../OtherWidget"
 import"../../BasicComponnet"
 
@@ -15,6 +15,10 @@ Rectangle
     }
 
 
+    BookWordList
+    {
+     id:bookwordlist
+    }
 
 
     clip: true
@@ -28,6 +32,7 @@ Rectangle
         anchors.topMargin: 10
         anchors.leftMargin: 10
         spacing: 10
+
 
 
          Component.onCompleted:
@@ -50,8 +55,14 @@ Rectangle
 function openwordlistview(path)
 {
 
+     listmodel.clear()
+    bookwordlist.openbook(path)
 
-    listmodel.append({"word":"test"})
+    for(var i=0;i<bookwordlist.count();++i)
+    {
+        listmodel.append({"word":bookwordlist.getword(i),"trans":bookwordlist.gettrans(i)})
+    }
+
     showlist.visible=true;
     bookslist.visible=false;
 
@@ -84,49 +95,215 @@ function openwordlistview(path)
         ListModel
         {
             id:listmodel
+
         }
 
 
 
-        //列表模式
-        ListView
+
+        Component
+        {
+            id:listdelegate
+
+         Rectangle
+         {
+             radius:2
+
+             width:wordlist.width
+             height:25
+
+
+             Text {
+                 id:wordtext
+                 anchors.verticalCenter:parent.verticalCenter
+                 font.family: "微软雅黑"
+                 width: 200
+                 height:parent.height
+                 font.pixelSize: 12
+                 text:word
+                 anchors.left: parent.left
+                 anchors.leftMargin: 5
+                 }
+             TextInput {
+                 id:transtext
+                 anchors.verticalCenter:parent.verticalCenter
+                 font.family: "微软雅黑"
+                 height:parent.height
+                 clip: true
+                 enabled: false
+                 anchors
+                 {
+                    left:wordtext.right
+                    right:parent.right
+
+
+                 }
+                 font.pixelSize: 12
+                 text: trans
+                 }
+
+
+
+             MouseArea
+             {
+                anchors.fill: parent
+
+                hoverEnabled: true
+
+                onEntered:
+                {
+                 parent.color="#cccccc"
+
+
+                }
+                onExited:
+                {
+                    parent.color="#ffffff"
+
+                }
+                onClicked:
+                {
+                     wordinfo.word=wordtext.text
+                     wordinfo.trans=transtext.text
+                }
+
+
+
+
+
+
+             }
+
+
+         }
+
+
+        }
+
+
+
+
+
+        SwipeView
         {
 
-            clip: true
-            height: parent.height
-            width: parent.width-50
-            anchors{
-            left: parent.left
-            leftMargin: 15
-            top:parent.top
-            topMargin:20
-            }
+            anchors.fill: parent
+            currentIndex: menu.currentIndex
+            interactive: false
+            anchors.margins: 3
+           clip: true
+            //列表模式
+            Page
+            {
+                ListView
+                {
+
+                    id:wordlist
+                    clip: true
+                    anchors{
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: 3
+                    rightMargin: 3
+                    bottom: parent.bottom
+                    top:parent.top
+                    topMargin:40
+                    }
 
 
-            model:listmodel
-            delegate:Rectangle
+                    model:listmodel
+                    delegate:listdelegate
+
+
+                }
+
+
+
+
+                Row
+                {
+                    spacing: 15
+                    anchors.top: parent.top
+                    anchors.topMargin:5
+                    anchors.leftMargin:5
+                    anchors.left: parent.left
+                    CloseButton
                     {
-                        width:parent.width
-                        height:25
-
-                        TextInput
+                        id:close
+                        onClicked:
                         {
-                            width: parent.width
-                            font.family: "微软雅黑"
-                            font.pixelSize: 12
-                            enabled: false
-                            selectByMouse: true
-                            text:word
+                            width:0
+                            height:0
+                         showlist.visible=false
+                         bookslist.visible=true
                         }
+                    }
+                    MoreButton
+                    {
 
+                        onClicked:
+                        {
+
+                            wordinfo.visible=(wordinfo.visible===false)?true:false
+                        }
+                    }
+                }
+
+
+
+
+
+
+
+                    WordModel
+                    {
+                        id:wordinfo
+                        visible: false
+
+                        back.visible: false
+                        anchors
+                        {
+                         top:wordlist.top
+                         bottom:wordlist.bottom
+                         left:wordlist.left
+                         leftMargin:200
+                        }
 
                     }
 
 
+
+
+
+            }
+
+
+              //卡片模式
+            Page
+            {
+
+
+
+                Text {
+
+                    text:"正在开发"
+                }
+
+
+
+
+            }
+             //矩块模式
+            Page
+            {
+                Text {
+
+                    text:"正在开发"
+                }
+            }
+
+
         }
-
-
-
 
         XMenu
         {
@@ -139,21 +316,6 @@ function openwordlistview(path)
 
 
             }
-        }
-        CloseButton
-        {
-            id:close
-            onClicked:
-            {
-                width:0
-                height:0
-             showlist.visible=false
-             bookslist.visible=true
-            }
-            anchors.top: parent.top
-            anchors.topMargin:5
-            anchors.rightMargin:5
-            anchors.right: parent.right
         }
 
     }

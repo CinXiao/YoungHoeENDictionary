@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include"wordbooks.h"
 #include "searchword.h"
-
+#include"getbookword.h"
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -13,10 +13,14 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
 
+    GetBookWord test;
+
+
 
    qmlRegisterType<SearchWord>("Searchword",1,0,"SearchCore");   //单词查找模块
-
    qmlRegisterType<WordBooks>("WordBooks",1,0,"BookCore");      //单词书模块
+   qmlRegisterType<GetBookWord>("WordBooks",1,0,"BookWordList");      //单词书模块
+
 
 
 

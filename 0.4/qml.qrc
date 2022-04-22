@@ -28,5 +28,12 @@
         <file>BasicComponnet/CloseButton.qml</file>
         <file>BasicComponnet/ShowAllButton.qml</file>
         <file>DicProject/ico/showall.png</file>
+        <file>DicProject/ico/more.png</file>
+        <file>BasicComponnet/MoreButton.qml</file>
+        <file>DicProject/ico/NE1.png</file>
+        <file>DicProject/ico/NE2.png</file>
+        <file>DicProject/ico/NE3.png</file>
+        <file>DicProject/ico/NE4.png</file>
+        <file>DicProject/ico/phonetic.png</file>
     </qresource>
 </RCC>

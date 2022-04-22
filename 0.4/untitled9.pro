@@ -1,4 +1,6 @@
 QT += quick xml
+OBJECTS_DIR  = tmp
+MOC_DIR      = tmp
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

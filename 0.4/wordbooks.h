@@ -37,10 +37,6 @@ public slots:
     int getbookcount();
 
 
-
-
-
-
 private:
     QList<BookInfo> _books;
    void initbookinfo();
