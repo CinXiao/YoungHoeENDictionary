@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>XButton.qml</file>
+        <file>DicProject/Menu.qml</file>
+        <file>DicProject/MainWindow.qml</file>
+        <file>BasicComponnet/Button.qml</file>
+        <file>BasicComponnet/XMenu.qml</file>
+        <file>DicProject/ico/collect.png</file>
+        <file>DicProject/ico/dictionary.png</file>
+        <file>DicProject/ico/home.png</file>
+        <file>DicProject/ico/learn.png</file>
+        <file>DicProject/ico/unfold.png</file>
+        <file>DicProject/MainWeidget.qml</file>
+        <file>DicProject/RootWidget/HomeWidget.qml</file>
+        <file>DicProject/RootWidget/CollectWidget.qml</file>
+        <file>DicProject/RootWidget/DictionaryWidget.qml</file>
+        <file>DicProject/RootWidget/LearnWidget.qml</file>
+        <file>DicProject/OtherWidget/Begainpage.qml</file>
+        <file>DicProject/OtherWidget/WriterInfo.qml</file>
+        <file>DicProject/ico/playsound.png</file>
+        <file>BasicComponnet/PlayBtn.qml</file>
+        <file>DicProject/OtherWidget/WordModel.qml</file>
+        <file>DicProject/OtherWidget/DicBook.qml</file>
+        <file>DicProject/ico/close.png</file>
+        <file>BasicComponnet/CloseButton.qml</file>
+        <file>BasicComponnet/ShowAllButton.qml</file>
+        <file>DicProject/ico/showall.png</file>
+        <file>DicProject/ico/more.png</file>
+        <file>BasicComponnet/MoreButton.qml</file>
+        <file>DicProject/ico/close2.png</file>
+        <file>BasicComponnet/Play_Stop_Btn.qml</file>
+        <file>DicProject/ico/phonetic.png</file>
+        <file>DicProject/ico/play.png</file>
+        <file>DicProject/ico/play2.png</file>
+        <file>DicProject/ico/stop.png</file>
+        <file>DicProject/ico/stop2.png</file>
+        <file>DicProject/ico/about.png</file>
+        <file>DicProject/ico/delete.png</file>
+        <file>DicProject/ico/delete2.png</file>
+        <file>DicProject/ico/seting.png</file>
+        <file>BasicComponnet/SetingButton.qml</file>
+        <file>BasicComponnet/DeleteButton.qml</file>
+        <file>BasicComponnet/Colorbtn.qml</file>
+    </qresource>
+</RCC>
