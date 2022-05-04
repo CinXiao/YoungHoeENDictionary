@@ -42,5 +42,19 @@
         <file>BasicComponnet/SetingButton.qml</file>
         <file>BasicComponnet/DeleteButton.qml</file>
         <file>BasicComponnet/Colorbtn.qml</file>
+        <file>BasicComponnet/ShowBtn.qml</file>
+        <file>DicProject/ico/show.png</file>
+        <file>DicProject/ico/unshow.png</file>
+        <file>DicProject/ico/opensound.png</file>
+        <file>DicProject/ico/unsound.png</file>
+        <file>BasicComponnet/SoundBtn.qml</file>
+        <file>DicProject/ico/ok.png</file>
+        <file>DicProject/img/bookback.jpg</file>
+        <file>DicProject/img/qml.png</file>
+        <file>DicProject/img/qt.png</file>
+        <file>DicProject/img/cpp.png</file>
+        <file>DicProject/img/f1.png</file>
+        <file>DicProject/img/f2.png</file>
+        <file>DicProject/img/f3.png</file>
     </qresource>
 </RCC>

@@ -9,6 +9,7 @@ Rectangle
         radius:5
         property int type:1
         property string audio:"test"
+        property alias player: player
         MediaPlayer
         {
             id:player

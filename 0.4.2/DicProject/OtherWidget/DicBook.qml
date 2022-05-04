@@ -4,14 +4,14 @@ import "../../BasicComponnet"
 Item {
 
 
-    property alias color:book.color
-    property alias writer:writename.text
-    property alias name:bookname.text
+    property string color:""
+    property string writer:""
+    property string name:""
 
     property string path:""
 
     signal openbook(string path);
-    signal insbook(string path);
+    signal insbook(string path,string name,string write,string color);
     id:root
 
 
@@ -32,11 +32,16 @@ Item {
     Rectangle
     {
 
+        Image {
+            anchors.fill: parent
+            opacity: 0.2
+           source: "../img/bookback.jpg"
+        }
         clip: true
         id:book
         anchors.fill: parent
         radius:5
-        color:"#5A5882"
+        color:root.color
         Text {
             id:bookname
             anchors
@@ -48,7 +53,7 @@ Item {
               font.pixelSize: 15
               color:"#ffffff"
             font.family: "微软雅黑"
-            text:"CET4-EASY"
+            text:name
         }
 
         Text {
@@ -62,13 +67,8 @@ Item {
              color:"#ffffff"
             font.pixelSize: 12
             font.family: "微软雅黑"
-            text:"System"
+            text:writer
         }
-
-
-
-
-
     }
 
 
@@ -88,7 +88,7 @@ Item {
         {
             onClicked:
             {
-                root.insbook(root.path)
+                root.insbook(root.path,root.name,root.writer,root.color)
                // console.log("clicked"+bookname.text)
             }
         }

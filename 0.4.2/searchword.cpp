@@ -78,10 +78,6 @@ QString SearchWord::search(QString word,int index,QString type)//目标单词
 
 
 
-
-
-
-
     _check.clear();//清空寄存列表
     _max_check=0;
 

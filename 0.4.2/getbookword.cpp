@@ -9,6 +9,69 @@ GetBookWord::GetBookWord()
 
 
 }
+
+  QString GetBookWord::insbookinfo(QString filepath,QString bookname,QString writername,QString color)
+  {
+      QDomDocument dom;
+      QFile file("UserData/UserSeting/BookInfo.xml");
+      if(!file.open(QIODevice::ReadOnly))
+      {
+         return "文件打开失败";
+      }
+
+      file.close();
+      file.open(QIODevice::ReadWrite);
+
+     /*信息重新写入文件*/
+      /*（暂时不修改源文件）*/
+
+
+
+      /*修改文件引导文件*/
+      dom.setContent(&file);
+
+      file.close();
+      //获取单个单词本节点信息
+      QDomNode item=dom.firstChild().firstChild();
+
+
+      while(!item.isNull())
+      {
+
+          //路径相同，修改值
+          if(item.firstChild().nextSibling().nextSibling().toElement().text()==filepath)
+          {
+
+              /*移除节点*/
+              item.removeChild(item.firstChild());
+              item.removeChild(item.firstChild());
+              item.removeChild(item.firstChild());
+              item.removeChild(item.firstChild());
+
+              //重新生成节点
+              QDomNode booknamenode=dom.createElement("BookName");
+              booknamenode.appendChild(dom.createTextNode(bookname));
+              QDomNode writenode=dom.createElement("WriterName");
+               writenode.appendChild(dom.createTextNode(writername));
+               QDomNode pathnode=dom.createElement("BookPath");
+                pathnode.appendChild(dom.createTextNode(filepath));
+                QDomNode colornode=dom.createElement("BookColor");
+                colornode.appendChild(dom.createTextNode(color));
+               item.appendChild(booknamenode);
+               item.appendChild(writenode);
+               item.appendChild(pathnode);
+               item.appendChild(colornode);
+
+              file.open(QIODevice::ReadWrite);
+              file.write(dom.toString().toUtf8());
+               return "修改成功,【颜色】重启软件生效";
+          }
+          item=item.nextSibling();
+      }
+
+    return "修改失败,原因未知";
+  }
+
    QString  GetBookWord::getphonetic(int index)
    {
 

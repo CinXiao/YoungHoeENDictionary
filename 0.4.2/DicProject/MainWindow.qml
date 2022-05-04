@@ -4,10 +4,13 @@ Item {
     anchors.fill: parent
 
 
+
+
 Rectangle
 {
     color:"#F7F7F7"
     anchors.fill: parent
+
 
   Menu
   {

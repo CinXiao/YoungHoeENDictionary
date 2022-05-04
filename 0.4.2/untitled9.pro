@@ -1,6 +1,6 @@
 QT += quick xml
-OBJECTS_DIR  = tmp
-MOC_DIR      = tmp
+#OBJECTS_DIR  = tmp
+#MOC_DIR      = tmp
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -8,6 +8,7 @@ MOC_DIR      = tmp
 
 SOURCES += \
         getbookword.cpp \
+        getinfo.cpp \
         main.cpp \
         searchword.cpp \
         word.cpp \
@@ -33,6 +34,7 @@ DISTFILES += \
 
 HEADERS += \
     getbookword.h \
+    getinfo.h \
     searchword.h \
     word.h \
     wordbooks.h \

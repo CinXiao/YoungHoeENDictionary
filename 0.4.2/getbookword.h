@@ -20,6 +20,7 @@ public slots:
     QString getword(int index);
     QString  gettrans(int index);
     QString  getphonetic(int index);
+    QString insbookinfo(QString filepath,QString bookname,QString writername,QString color);
 private:
 
     void test();

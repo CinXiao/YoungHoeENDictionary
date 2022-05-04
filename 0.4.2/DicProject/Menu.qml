@@ -13,6 +13,9 @@ Item{
     id:root
 
 
+
+
+
     Rectangle
     {
         id:menubar
@@ -156,5 +159,12 @@ Item{
     }
 
 
-
+    Text {
+        font.family: "微软雅黑"
+        font.bold: true
+        font.pixelSize: 10
+        color:"#ffffff"
+        anchors.bottom: menubar.bottom
+        text: "For YH\nGithub\\CinXiao\nEmali:2256530727@qq.com"
+    }
 }

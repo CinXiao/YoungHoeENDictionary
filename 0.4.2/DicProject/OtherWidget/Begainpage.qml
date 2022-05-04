@@ -2,12 +2,13 @@ import QtQuick 2.9
 import QtQuick.Controls 2.5
 import QtGraphicalEffects 1.0
 import "../../BasicComponnet"
-
+import GetInfo 1.0
 
 
 
 Item {
     anchors.fill: parent
+    id:root
     SwipeView
     {
 
@@ -16,19 +17,16 @@ Item {
         clip: true
        interactive: false
 
+       InfoCore
+       {
+        id:info
+
+       }
         Page
         {
 
 
-            DropShadow
-            {
 
-            anchors.fill:page1
-            radius:2
-            samples: 4
-            source: page1
-
-            }
 
             Rectangle
             {
@@ -38,6 +36,7 @@ Item {
               height:parent.height*0.7
               x:200
               color: "#FAFAFA"
+              border.color: "#cccccc"
               radius: 5
               id:page1
 
@@ -51,7 +50,7 @@ Item {
 
                        font.family: "微软雅黑"
                        font.pixelSize: 30
-                       text:"Hello,欢迎"
+                       text:"Hello 你好呀"
                    }
                   TextEdit
                    {
@@ -61,8 +60,8 @@ Item {
                        font.family: "微软雅黑"
                        wrapMode: Text.WordWrap
                        clip: true
-                       width:page1.width-20
-                       text: "1．许可证的授予。\n  .本《协议》授予您此软件所有权利，即您可以随意传播、复制、作为商业用途。\n    ．本《协议》授予您此软件所有图标、照片、标志。\n\n2.其它权利和限制的说明。\n    ．本软件若对您的夫妻生活、家庭、子女、工作、身心健康造成重大伤害，软件作者无任何责任\n    ．若因您本人使用本软件后,对自然、人类、世界和平、银河系的安宁造成重大影响，软件作者无任何责任\n"
+                       width:400
+                       text: info.getsoftwear()
                    }
 
 
@@ -71,11 +70,9 @@ Item {
                       spacing:150
                       Button
                       {
-                          text:"退出"
-                          onClicked: {
-                          rootview.destroy()
+                       text:"下一步"
+                      opacity: 0.0
 
-                          }
                       }
                       Button
                       {
@@ -84,6 +81,7 @@ Item {
                        {
                            rootview.currentIndex=rootview.currentIndex+1
                        }
+
                       }
 
                   }
@@ -99,8 +97,228 @@ Item {
             }
 
         }
-        Page{}
-        Page{}
+        Page
+        {
+            Rectangle
+            {
+
+              anchors.centerIn: parent
+              width: parent.width*0.7
+              height:parent.height*0.7
+              x:200
+              color: "#FAFAFA"
+              border.color: "#cccccc"
+              radius: 5
+              id:page2
+
+              Column
+              {
+
+                  anchors.centerIn: parent
+                  spacing: 30
+                   Text {
+                       anchors.horizontalCenter: parent.horizontalCenter
+                       font.family: "微软雅黑"
+                       font.pixelSize: 30
+                       text:"Welcome 欢迎使用"
+                   }
+                 Rectangle
+                   {
+                       enabled: false
+                       anchors.horizontalCenter: parent.horizontalCenter
+                       height:250
+                       clip: true
+                       width:page1.width-20
+
+                       Column
+                       {
+                           spacing: 10
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        Row
+                        {
+                            Image {
+
+                                id:im1
+                                width: 80
+                                height: 80
+                                source: "../img/f1.png"
+                            }
+                            Text {
+                               anchors.verticalCenter: im1.verticalCenter
+                               font.family: "微软雅黑"
+                               font.pixelSize: 30
+                               color:"#6b6b6b"
+                                text: "极简界面"
+                            }
+                        }
+                        Row
+                        {
+                            spacing: 10
+                            Image {
+
+                                id:im2
+                                width: 80
+                                height: 80
+                                source: "../img/f2.png"
+                            }
+                            Text {
+                               anchors.verticalCenter: im2.verticalCenter
+                               font.family: "微软雅黑"
+                               font.pixelSize: 30
+                               color:"#6b6b6b"
+                               text: "灵活扩展"
+                            }
+                        }
+                        Row
+                        {
+                            spacing: 35
+                            Image {
+
+                                id:im3
+                                width: 60
+                                height: 60
+                                source: "../img/f3.png"
+                            }
+                            Text {
+                               anchors.verticalCenter: im3.verticalCenter
+                               font.family: "微软雅黑"
+                               font.pixelSize: 30
+                               color:"#6b6b6b"
+                                text: "词汇丰富"
+                            }
+                        }
+                       }
+
+
+                   }
+
+
+                  Row{
+                      anchors.horizontalCenter: parent.horizontalCenter
+                      spacing:150
+
+                      Button
+                      {
+                       text:"上一步"
+                       onClicked:
+                       {
+                           rootview.currentIndex=rootview.currentIndex-1
+                       }
+
+                      }
+                      Button
+                      {
+                       text:"下一步"
+                       onClicked:
+                       {
+                           rootview.currentIndex=rootview.currentIndex+1
+                       }
+
+                      }
+
+                  }
+
+              }
+
+
+
+
+
+
+
+            }
+        }
+        Page
+        {
+
+            Rectangle
+            {
+
+              anchors.centerIn: parent
+              width: parent.width*0.7
+              height:parent.height*0.7
+              x:200
+              color: "#FAFAFA"
+              border.color: "#cccccc"
+              radius: 5
+              id:page3
+
+              Column
+              {
+
+                  anchors.centerIn: parent
+                  spacing: 30
+                   Text {
+                       anchors.horizontalCenter: parent.horizontalCenter
+                       font.family: "微软雅黑"
+                       font.pixelSize: 30
+                       text:"Go 让我们开始吧"
+                   }
+                   Rectangle
+                   {
+                       height:250
+                       width:page1.width-20
+                  Row
+                   {
+                       enabled: false
+                       anchors.horizontalCenter: parent.horizontalCenter
+                       spacing: 5
+                       Image {
+                           width: 100
+                           height: 100
+                           source: "../img/cpp.png"
+                       }
+                       Image {
+                           width: 100
+                           height: 100
+                           source: "../img/qt.png"
+                       }
+                       Image {
+                           width: 100
+                           height: 100
+                           source: "../img/qml.png"
+                       }
+
+                   }
+
+                   }
+
+
+                  Row{
+                      anchors.horizontalCenter: parent.horizontalCenter
+                      spacing:150
+
+                      Button
+                      {
+                       text:"上一步"
+                       onClicked:
+                       {
+                           rootview.currentIndex=rootview.currentIndex-1
+                       }
+
+                      }
+                      Button
+                      {
+                       text:"确认"
+                       onClicked:
+                       {
+                           root.visible=false
+                       }
+
+                      }
+
+                  }
+
+              }
+
+
+
+
+
+
+
+            }
+        }
 
     }
 }
