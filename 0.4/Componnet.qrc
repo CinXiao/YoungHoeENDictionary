@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>Button.qml</file>
-        <file>VMenu.qml</file>
-    </qresource>
-</RCC>
