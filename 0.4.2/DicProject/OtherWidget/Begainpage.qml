@@ -25,11 +25,21 @@ Item {
         Page
         {
 
+            MouseArea
+            {
+            width: 100
+            height: 100
+            onClicked:
+            {
 
+            we.visible=true}
+
+            }
 
 
             Rectangle
             {
+
 
               anchors.centerIn: parent
               width: parent.width*0.7
@@ -39,6 +49,72 @@ Item {
               border.color: "#cccccc"
               radius: 5
               id:page1
+              Rectangle
+              {
+                  width: 50
+                  height:50
+                  visible: false
+                  id:we
+                    z:2
+                    anchors
+                    {
+                    left:parent.left
+                    top:parent.top
+                    leftMargin:3
+                    topMargin:3
+
+
+                    }
+                    Behavior on width
+                    {
+
+
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.InOutQuad
+                        }
+
+                    }
+                    Behavior on height
+                    {
+
+
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.InOutQuad
+                        }
+
+                    }
+
+                    Image {
+
+                        anchors.fill: parent
+                        source: "../img/we.jpg"
+                        mipmap: true
+                    }
+                    MouseArea
+                    {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered:
+                    {
+
+                        parent.width=400
+                        parent.height=400
+
+
+
+                    }
+                    onExited:
+                    {
+                        parent.width=50
+                        parent.height=50
+
+
+                    }
+
+                    }
+              }
 
               Column
               {
@@ -52,17 +128,32 @@ Item {
                        font.pixelSize: 30
                        text:"Hello 你好呀"
                    }
-                  TextEdit
-                   {
-                       enabled: false
-                       anchors.horizontalCenter: parent.horizontalCenter
+
+                   ScrollView{
+
                        height:250
-                       font.family: "微软雅黑"
-                       wrapMode: Text.WordWrap
-                       clip: true
                        width:400
-                       text: info.getsoftwear()
-                   }
+                       clip: true
+                       Rectangle
+                       {
+                           height:400
+                           width:400
+                           TextEdit
+                            {
+                                anchors.fill: parent
+                                enabled: false
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                font.family: "微软雅黑"
+                                wrapMode: Text.WordWrap
+                                clip: true
+                                text: info.getsoftwear()
+                            }
+
+                       }
+
+                        }
+
+
 
 
                   Row{

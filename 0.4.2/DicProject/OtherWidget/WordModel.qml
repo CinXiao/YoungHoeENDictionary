@@ -110,7 +110,6 @@ Rectangle
 
                 Text {
                     id: word_trans
-
                     anchors.left: parent.left
                     anchors.leftMargin: 20
                     color:"#696969"

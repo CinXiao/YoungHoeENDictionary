@@ -27,7 +27,7 @@ Item {
         width: parent.width - 50
         height: 100
         radius: 5
-        color: "#D1D1D1"
+        color: "#EDEDED"
         TextInput {
 
             selectByMouse: true

@@ -6,16 +6,43 @@ import QtMultimedia 5.9
 import "../OtherWidget"
 import "../../BasicComponnet"
 
-
 Rectangle {
 
-    property string filepath:""
-    property string bookname:""
-    property string writename:""
-    property string bookcolor:""
-
+    property string filepath: ""
+    property string bookname: ""
+    property string writename: ""
+    property string bookcolor: ""
     property int word_count: 0
     property int cur_index: 0
+
+//    Rectangle
+//    {
+//      anchors.centerIn: parent
+//        width:300
+//        height:150
+//        border.color: "#cccccc"
+//        radius:5
+
+//        id:loadview
+//        Column
+//        {
+
+//        anchors.centerIn: parent
+////        Text {
+////            font.family: "微软雅黑"
+////            font.pixelSize: 25
+////            text:"正在加载"
+////            color:"#2b2b2b"
+////        }
+
+//        BusyIndicator{
+//            running: true
+//        }
+//            }
+//        z:2
+
+//    }
+
 
     BookCore {
         id: bookscore
@@ -27,12 +54,10 @@ Rectangle {
 
     clip: true
     anchors.fill: parent
-
     id: root
     ScrollView {
         width: parent.width
         height: parent.height
-
 
         Flow {
             id: bookslist
@@ -40,50 +65,48 @@ Rectangle {
             height: root.height
             spacing: 10
             Component.onCompleted: {
-                loadingbook();
+                loadingbook()
             }
         }
-
     }
 
-    function loadingbook()
-    {
+    function loadingbook() {
         word_count = bookscore.getbookcount()
         for (var i = 0; i < word_count; ++i) {
             var temp = Qt.createComponent("../OtherWidget/DicBook.qml")
             if (temp.status === Component.Ready) {
                 var item = temp.createObject(bookslist, {
-
                                                  "color": bookscore.getbookinfo(
-                                                              i,
-                                                              "color"),
+                                                              i, "color"),
                                                  "path": bookscore.getbookinfo(
                                                              i, "path"),
                                                  "name": bookscore.getbookinfo(
                                                              i, "name"),
                                                  "writer": bookscore.getbookinfo(
-                                                               i,
-                                                               "writer")
+                                                               i, "writer")
                                              })
+
                 item.openbook.connect(openwordlistview)
                 item.insbook.connect(insbookinfo)
             }
 
+
         }
     }
 
+    function insbookinfo(path, name, write, color) {
 
-
-    function insbookinfo(path,name,write,color) {
-
-        bookname=name
-        writename=write
-        bookcolor=color
-        filepath=path
+        bookname = name
+        writename = write
+        bookcolor = color
+        filepath = path
         setview.visible = true
     }
 
+
     function openwordlistview(path) {
+
+
 
         listmodel.clear()
         bookwordlist.openbook(path)
@@ -92,11 +115,16 @@ Rectangle {
         wordinfo.phonetic = bookwordlist.getphonetic(0)
 
         for (var i = 0; i < bookwordlist.count(); ++i) {
+            var _word=bookwordlist.getword(i);
+            var _trans=bookwordlist.gettrans(i);
             listmodel.append({
-                                 "word": bookwordlist.getword(i),
-                                 "trans": bookwordlist.gettrans(i),
+                                 "word": _word,
+                                 "trans":_trans,
                                  "phonetic": bookwordlist.getphonetic(i)
                              })
+            var worditem=Qt.createComponent("../OtherWidget/WordItem.qml")
+            worditem.createObject(worditemview,{"text":_word,"trans":_trans});
+
         }
 
         showlist.visible = true
@@ -108,6 +136,10 @@ Rectangle {
         card_trans.text = bookwordlist.gettrans(0)
         card_title.text = bookwordlist.getword(0)
         player_btn.audio = card_title.text
+
+
+
+
     }
 
     //设置窗口
@@ -121,62 +153,53 @@ Rectangle {
             anchors.fill: parent
         }
 
-        Rectangle
-        {
+        Rectangle {
             Image {
 
-               id: _image
+                id: _image
                 anchors.fill: parent
                 opacity: 0.2
                 source: "../img/bookback.jpg"
-
             }
 
-
-
             clip: true
-            id:bookshow
-            anchors.left:parent.left
-            anchors.leftMargin:30
+            id: bookshow
+            anchors.left: parent.left
+            anchors.leftMargin: 30
             anchors.top: parent.top
             anchors.topMargin: 30
             width: 150
             height: 200
-            radius:5
-            color:bookcolor
+            radius: 5
+            color: bookcolor
             Text {
-                id:book_name
-                anchors
-                {
-                top:parent.top
-               topMargin:10
-               horizontalCenter:parent.horizontalCenter
+                id: book_name
+                anchors {
+                    top: parent.top
+                    topMargin: 10
+                    horizontalCenter: parent.horizontalCenter
                 }
-                  font.pixelSize: 15
-                  color:"#ffffff"
+                font.pixelSize: 15
+                color: "#ffffff"
                 font.family: "微软雅黑"
-                text:booknameinput.text
+                text: booknameinput.text
             }
 
             Text {
-                    id:write_name
-                anchors
-                {
-                   top:book_name.bottom
-                   topMargin:5
-                   horizontalCenter:book_name.horizontalCenter
+                id: write_name
+                anchors {
+                    top: book_name.bottom
+                    topMargin: 5
+                    horizontalCenter: book_name.horizontalCenter
                 }
-                 color:"#ffffff"
+                color: "#ffffff"
                 font.pixelSize: 12
                 font.family: "微软雅黑"
-                text:writenameinput.text
+                text: writenameinput.text
             }
-
         }
 
-
         Column {
-
 
             spacing: 5
             anchors.fill: parent
@@ -195,7 +218,7 @@ Rectangle {
                 id: booknameinput
                 font.pixelSize: 15
                 font.family: "微软雅黑"
-                text:bookname
+                text: bookname
                 selectByMouse: true
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -235,447 +258,445 @@ Rectangle {
                     Colorbtn {
                         color: "#f7acbc"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#ef5b9c"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#f15b6c"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#f391a9"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#bd6758"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#d71345"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#d93a49"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#bb505d"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#973c3f"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#aa363d"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#f3715c"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#7a1723"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#8e453f"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#733a31"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#f15a22"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#b4532a"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#b7704f"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#c99979"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#f58220"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#ae6642"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#69541b"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#df9464"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#6d5826"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#dec674"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#596032"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#525f42"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#2e3a1f"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#4d4f36"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#b2d235"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#5c7a29"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#7fb80e"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#6d8346"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#78a355"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#74905d"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#1d953f"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#77ac98"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#007d65"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#45b97c"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#007947"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#375830"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#65c294"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#00ae9d"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#508a88"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#50b7c1"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#00a6ac"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#78cdd1"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#008792"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#009ad6"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#145b7d"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#7bbfea"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#228fbd"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#2468a2"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#2570a1"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#1b315e"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#003a6c"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#102b6a"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#46485f"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#181d4b"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#1a2933"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#6a6da9"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#494e8f"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#9b95c9"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#6f60aa"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#594c6d"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#694d9f"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#6f599c"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#543044"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#411445"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#7c8577"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                     Colorbtn {
                         color: "#3c3645"
                         onClick: {
-                          bookcolor=color;
+                            bookcolor = color
                         }
                     }
                 }
             }
 
-            Rectangle
-            {
+            Rectangle {
 
-                id:infomessage
+                id: infomessage
                 opacity: 0.0
                 anchors.horizontalCenter: parent.horizontalCenter
                 border.color: "#cccccc"
-                radius:5
+                radius: 5
                 width: 300
                 height: 35
-                Row
-                {
+                Row {
                     spacing: 10
-                     anchors.centerIn: parent
-                     Image {
-                         mipmap: true
+                    anchors.centerIn: parent
+                    Image {
+                        mipmap: true
 
-                         width: 25
-                         height: 25
-                         source: "../ico/ok.png"
-                     }
+                        width: 25
+                        height: 25
+                        source: "../ico/ok.png"
+                    }
                     Text {
 
                         font.pixelSize: 15
@@ -685,60 +706,61 @@ Rectangle {
                     }
                 }
 
-
-
-                           NumberAnimation{
-                               id:showinfo
-                               target: infomessage
-                               property: "opacity"
-                               to:1.0
-                               duration:1000
-                               onStopped:
-                               {
-                               hideinfo.start()
-                               }
-                           }
-                           //动画2
-                           NumberAnimation{
-                               id:hideinfo
-                               target: infomessage
-                               property: "opacity"
-                               to:0.0
-                               duration:1500
-                           }
-
-
-
-
-
-
-
-            }
-
-
-
-            Button {
-
-                id:accpect
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "应用并更改"
-                onClicked:
-                {
-                   info.text=bookwordlist.insbookinfo(filepath,booknameinput.text,writenameinput.text,bookcolor)
-                   showinfo.start();
-                   //infomessage.opacity=0.0;
+                NumberAnimation {
+                    id: showinfo
+                    target: infomessage
+                    property: "opacity"
+                    to: 1.0
+                    duration: 1000
+                    onStopped: {
+                        hideinfo.start()
+                    }
+                }
+                //动画2
+                NumberAnimation {
+                    id: hideinfo
+                    target: infomessage
+                    property: "opacity"
+                    to: 0.0
+                    duration: 1500
                 }
             }
 
+            Button {
+
+                id: accpect
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "应用并更改"
+                onClicked: {
+                    info.text = bookwordlist.insbookinfo(filepath,
+                                                         booknameinput.text,
+                                                         writenameinput.text,
+                                                         bookcolor)
+                    showinfo.start()
+                    //infomessage.opacity=0.0;
+                }
+            }
         }
     }
 
-
-
-
-
     //显示窗口
     Rectangle {
+
+        CloseButton {
+
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            z:2
+            onClicked: {
+                showlist.visible = false
+                bookslist.visible = true
+                timer.stop()
+                player_btn.visible = true
+                play_stop.deful()
+            }
+        }
 
         visible: false
         id: showlist
@@ -824,10 +846,8 @@ Rectangle {
             //列表模式
             Page {
 
-                ListView {
-
+                ScrollView {
                     id: wordlist
-                    clip: true
                     anchors {
                         left: parent.left
                         right: parent.right
@@ -838,33 +858,27 @@ Rectangle {
                         topMargin: 40
                     }
 
-                    model: listmodel
-                    delegate: listdelegate
+                    ListView {
+
+                        clip: true
+                        anchors.fill: parent
+                        model: listmodel
+                        delegate: listdelegate
+                    }
                 }
 
-                Row {
-                    spacing: 15
-                    anchors.top: parent.top
-                    anchors.topMargin: 5
-                    anchors.leftMargin: 5
-                    anchors.left: parent.left
-                    CloseButton {
-                        id: close
-                        onClicked: {
-                            width: 0
-                            height: 0
-                            showlist.visible = false
-                            bookslist.visible = true
-                        }
-                    }
+
                     MoreButton {
 
+                       anchors.verticalCenter: parent.verticalCenter
+                        x:160
+                        z:2
                         onClicked: {
 
                             wordinfo.visible = (wordinfo.visible === false) ? true : false
                         }
                     }
-                }
+
 
                 WordModel {
                     id: wordinfo
@@ -883,17 +897,6 @@ Rectangle {
             //卡片模式
             Page {
 
-                CloseButton {
-
-                    onClicked: {
-                        showlist.visible = false
-                        bookslist.visible = true
-                        timer.stop()
-                        player_btn.visible = true
-                        play_stop.deful()
-                    }
-                }
-
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: card.top
@@ -906,30 +909,23 @@ Rectangle {
                         repeat: true
                         onTriggered: {
 
-                            if(slider.value==listmodel.count - 1)
-                            {
-                                slider.value=0;
-
+                            if (slider.value == listmodel.count - 1) {
+                                slider.value = 0
                             }
                             slider.value = slider.value + 1
                             player_btn.play()
                         }
                     }
 
-                    ShowBtn
-                    {
+                    ShowBtn {
 
-                        onShow:
-                        {
-                         if(i)
-                         {
-                             card_trans.visible=true
-                         }else
-                         {
+                        onShow: {
+                            if (i) {
+                                card_trans.visible = true
+                            } else {
 
-                             card_trans.visible=false
-                         }
-
+                                card_trans.visible = false
+                            }
                         }
                     }
                     Play_Stop_Btn {
@@ -947,24 +943,15 @@ Rectangle {
                             player_btn.visible = true
                         }
                     }
-                    SoundBtn
-                    {
-                        onOpen:
-                        {
-                            if(i)
-                            {
-                                 player_btn.player.volume=1
+                    SoundBtn {
+                        onOpen: {
+                            if (i) {
+                                player_btn.player.volume = 1
+                            } else {
+                                player_btn.player.volume = 0
                             }
-                                else
-                            {
-                                player_btn.player.volume=0
-                            }
-
                         }
-
                     }
-
-
                 }
 
                 Rectangle {
@@ -1008,7 +995,7 @@ Rectangle {
                             text: ""
                         }
                         Text {
-                            width: parent.width-60
+                            width: parent.width - 60
                             height: 250
                             wrapMode: Text.WordWrap
                             font.family: "微软雅黑"
@@ -1021,28 +1008,24 @@ Rectangle {
                     }
                 }
 
-               Button
-               {
-                   width: 25
-                   height:50
-                text: ">"
-                anchors.right: card.right
-                anchors.rightMargin: 5
-                anchors.verticalCenter: card.verticalCenter
-                onClicked:slider.value=slider.value+1
-
-               }
-               Button
-               {
-                   width: 25
-                   height:50
-                text: "<"
-                anchors.left: card.left
-                anchors.leftMargin:  5
-                anchors.verticalCenter: card.verticalCenter
-                onClicked: slider.value=slider.value-1
-
-               }
+                Button {
+                    width: 25
+                    height: 50
+                    text: ">"
+                    anchors.right: card.right
+                    anchors.rightMargin: 5
+                    anchors.verticalCenter: card.verticalCenter
+                    onClicked: slider.value = slider.value + 1
+                }
+                Button {
+                    width: 25
+                    height: 50
+                    text: "<"
+                    anchors.left: card.left
+                    anchors.leftMargin: 5
+                    anchors.verticalCenter: card.verticalCenter
+                    onClicked: slider.value = slider.value - 1
+                }
                 Text {
                     anchors.bottom: slider.top
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1073,9 +1056,28 @@ Rectangle {
 
             //矩块模式
             Page {
-                Text {
-                    text: "正在开发"
+                clip: true
+
+                id:worditempage
+                Rectangle
+                {
+                     anchors.fill: parent
+                     anchors.top: parent.top
+                     anchors.topMargin: 35
+
+                     clip: true
+                Flickable {
+                    anchors.fill: parent
+                    contentWidth: worditemview.width
+                    contentHeight: worditemview.height
+                    Flow {
+                        spacing: 5
+                        width: 2500
+                        id: worditemview
+                    }
                 }
+                    }
+
             }
 
             onCurrentIndexChanged: {
