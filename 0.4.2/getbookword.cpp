@@ -64,7 +64,7 @@ GetBookWord::GetBookWord()
 
               file.open(QIODevice::ReadWrite);
               file.write(dom.toString().toUtf8());
-               return "修改成功,【颜色】重启软件生效";
+               return "修改成功,重启软件生效";
           }
           item=item.nextSibling();
       }

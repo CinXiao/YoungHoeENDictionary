@@ -56,5 +56,8 @@
         <file>DicProject/img/f1.png</file>
         <file>DicProject/img/f2.png</file>
         <file>DicProject/img/f3.png</file>
+        <file>DicProject/OtherWidget/WordItem.qml</file>
+        <file>DicProject/ico/loading.gif</file>
+        <file>DicProject/img/we.jpg</file>
     </qresource>
 </RCC>
