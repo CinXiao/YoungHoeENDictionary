@@ -15,7 +15,28 @@ Item {
         Page{HomeWidget{}}
         Page{LearnWidget{}}
         Page{DictionaryWidget{}}
-        Page{CollectWidget{}}
+        Page{CollectWidget{id:collect}}
+
+
+
+
+onCurrentIndexChanged:
+{
+
+
+    switch(currentIndex)
+    {
+     case 3:
+     {
+    collect.load()
+     }break;
+
+    }
+
+}
+
+
+
     }
 
 }

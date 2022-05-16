@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.5
-
+import "../../BasicComponnet"
 Rectangle {
     property  alias text: t.text
     property  alias trans: trans.text
@@ -20,6 +20,7 @@ Rectangle {
         font.pixelSize: 30
         color: "#ffffff"
     }
+
 
     Rectangle
     {
@@ -102,5 +103,10 @@ Rectangle {
      }
 
 
+    }
+    DeleteButton
+    {
+
+    onClicked: {worditem.destroy()}
     }
 }

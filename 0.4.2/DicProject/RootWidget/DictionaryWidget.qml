@@ -14,35 +14,44 @@ Rectangle {
     property string bookcolor: ""
     property int word_count: 0
     property int cur_index: 0
+    property string bookpath:""
+    property int count: 0
+    property int now_count: 0
 
-//    Rectangle
-//    {
-//      anchors.centerIn: parent
-//        width:300
-//        height:150
-//        border.color: "#cccccc"
-//        radius:5
+    Timer
+    {
+    id:creater
+    interval: 30
+    repeat: true
+    onTriggered:
+    {
+        if(now_count<count)
+        {
 
-//        id:loadview
-//        Column
-//        {
+            var _word=bookwordlist.getword(now_count);
+            var _trans=bookwordlist.gettrans(now_count);
+            listmodel.append({
+                                 "word": _word,
+                                 "trans":_trans,
+                                 "phonetic": bookwordlist.getphonetic(now_count)
+                             })
 
-//        anchors.centerIn: parent
-////        Text {
-////            font.family: "微软雅黑"
-////            font.pixelSize: 25
-////            text:"正在加载"
-////            color:"#2b2b2b"
-////        }
+            now_count++;
+        }else
+        {
+         console.log(now_count+"\\"+count);
+         creater.running=false
+         now_count=0;
+         count=0;
 
-//        BusyIndicator{
-//            running: true
-//        }
-//            }
-//        z:2
+        }
 
-//    }
+    }
 
+
+   running: false
+
+    }
 
     BookCore {
         id: bookscore
@@ -104,43 +113,37 @@ Rectangle {
     }
 
 
+
     function openwordlistview(path) {
 
 
-
+        bookpath=path;
         listmodel.clear()
-        bookwordlist.openbook(path)
-        wordinfo.word = bookwordlist.getword(0)
-        wordinfo.trans = bookwordlist.gettrans(0)
-        wordinfo.phonetic = bookwordlist.getphonetic(0)
-
-        for (var i = 0; i < bookwordlist.count(); ++i) {
-            var _word=bookwordlist.getword(i);
-            var _trans=bookwordlist.gettrans(i);
-            listmodel.append({
-                                 "word": _word,
-                                 "trans":_trans,
-                                 "phonetic": bookwordlist.getphonetic(i)
-                             })
-            var worditem=Qt.createComponent("../OtherWidget/WordItem.qml")
-            worditem.createObject(worditemview,{"text":_word,"trans":_trans});
-
-        }
-
         showlist.visible = true
         bookslist.visible = false
 
-        //卡片模式界面初始化
+
+        bookwordlist.openbook(bookpath)
+        count=bookwordlist.count()
+
+
+        wordinfo.word = bookwordlist.getword(0)
+        wordinfo.trans = bookwordlist.gettrans(0)
+        wordinfo.phonetic = bookwordlist.getphonetic(0)
         card_title.text = bookwordlist.getword(0)
         card_p.text = bookwordlist.getphonetic(0)
         card_trans.text = bookwordlist.gettrans(0)
         card_title.text = bookwordlist.getword(0)
         player_btn.audio = card_title.text
 
+        creater.running=true;
 
 
-
+        //卡片模式界面初始化
     }
+
+
+
 
     //设置窗口
     Rectangle {
@@ -204,8 +207,12 @@ Rectangle {
             spacing: 5
             anchors.fill: parent
             CloseButton {
-                onClicked: setview.visible = false
-            }
+                onClicked: {
+                    now_count=0;
+                     creater.running=false;
+                    setview.visible = false
+                            }
+                }
 
             Text {
 
@@ -759,6 +766,9 @@ Rectangle {
                 timer.stop()
                 player_btn.visible = true
                 play_stop.deful()
+                count=0;
+                now_count=0;
+                creater.running=false
             }
         }
 
@@ -832,6 +842,11 @@ Rectangle {
                         wordinfo.trans = transtext.text
                         wordinfo.phonetic = wordphonetic.text
                     }
+                    onDoubleClicked:
+                    {
+                        wordinfo.visible=(wordinfo.visible?false:true)
+
+                    }
                 }
             }
         }
@@ -884,7 +899,6 @@ Rectangle {
                     id: wordinfo
                     visible: false
 
-                    back.visible: false
                     anchors {
                         top: wordlist.top
                         bottom: wordlist.bottom
@@ -1054,31 +1068,7 @@ Rectangle {
                 }
             }
 
-            //矩块模式
-            Page {
-                clip: true
 
-                id:worditempage
-                Rectangle
-                {
-                     anchors.fill: parent
-                     anchors.top: parent.top
-                     anchors.topMargin: 35
-
-                     clip: true
-                Flickable {
-                    anchors.fill: parent
-                    contentWidth: worditemview.width
-                    contentHeight: worditemview.height
-                    Flow {
-                        spacing: 5
-                        width: 2500
-                        id: worditemview
-                    }
-                }
-                    }
-
-            }
 
             onCurrentIndexChanged: {
                 timer.stop()

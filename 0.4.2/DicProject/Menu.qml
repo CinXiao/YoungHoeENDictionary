@@ -76,8 +76,6 @@ Item{
             onClicked:
             {
                 current=index;
-                console.log(current)
-
             }
             }
             Behavior on color
@@ -129,7 +127,6 @@ Item{
     radius:15
     border.width: 2
     border.color: "#F2F2F2"
-
     anchors.left: menubar.right
     anchors.leftMargin: -width/2
     anchors.verticalCenter:menubar.verticalCenter
