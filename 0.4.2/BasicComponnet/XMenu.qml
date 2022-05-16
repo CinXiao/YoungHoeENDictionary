@@ -10,7 +10,7 @@ Rectangle
 
 
     id:root
-    width:250
+    width:200
     height:50
     color: "#E8E8E8"
     radius: 5
@@ -22,7 +22,7 @@ Rectangle
         x:menu1.x
         y:menu1.y
         z:1
-        width:parent.width/3
+        width:parent.width/2
         height:parent.height
         color: "#3282F6"
         radius: 5
@@ -65,7 +65,7 @@ Rectangle
         {
             color: root.color
             id:menu1
-            width:parent.width/3
+            width:parent.width/2
             height:parent.height
             Text {id:menu1text
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -92,7 +92,7 @@ Rectangle
         {
              color: root.color
             id:menu2
-            width:parent.width/3
+            width:parent.width/2
             height:parent.height
             MouseArea
             {
@@ -114,33 +114,7 @@ Rectangle
 
             }
         }
-        Rectangle
-        {
-         color: root.color
-         id:menu3
-         width:parent.width/3
-         height:parent.height
-         Text {
-             id:menu3text
-             anchors.horizontalCenter: parent.horizontalCenter
-             anchors.verticalCenter: parent.verticalCenter
-             font.pixelSize: 15
-             font.family: "微软雅黑"
-             color: "#000000"
-               text: "矩块"
-         }
-         MouseArea
-         {
-                anchors.fill: parent
-                onClicked:
-                {
-                   t.text=menu3text.text
-                    moveanimation.to=parent.x
-                    moveanimation.restart()
-                    currentIndex=2
-                }
-         }
-        }
+
 
     }
 

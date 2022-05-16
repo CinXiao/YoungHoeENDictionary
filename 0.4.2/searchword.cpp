@@ -69,7 +69,7 @@ QString SearchWord::search(QString word,QString type)
 
 
 
-  return "NAN";
+  return "";
 
 }
 

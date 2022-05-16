@@ -15,8 +15,9 @@ Window {
     }
 
 
-    width: 800
-    height: 600
+
+    minimumWidth:800
+      minimumHeight: 600
     visible: true
     title:"DIC词典"
 
@@ -42,8 +43,9 @@ Window {
     Begainpage
     {
         visible: false
-     id:fristview
+        id:fristview
     }
+
 
 
 

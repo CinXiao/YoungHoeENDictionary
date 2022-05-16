@@ -59,5 +59,9 @@
         <file>DicProject/OtherWidget/WordItem.qml</file>
         <file>DicProject/ico/loading.gif</file>
         <file>DicProject/img/we.jpg</file>
+        <file>BasicComponnet/CollectBtn.qml</file>
+        <file>DicProject/ico/uncollect.png</file>
+        <file>DicProject/ico/collected.png</file>
+        <file>DicProject/javascript/Data.js</file>
     </qresource>
 </RCC>

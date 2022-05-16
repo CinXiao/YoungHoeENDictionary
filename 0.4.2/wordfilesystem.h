@@ -6,7 +6,7 @@
 #include <QFile>
 #include<QDebug>
 #include<QVector>
-
+#include<QThread>
 /*
 **用来打开单词库，返回一个list
 **
@@ -25,11 +25,13 @@ public:
 
     QString getwordinfo(int index,QString type);//获取单词信息
 
+protected:
+
 
 
 private:
     void Parsingnode(QDomNode item);//解析节点
-
+   // QThread th1;
 
 private:
 

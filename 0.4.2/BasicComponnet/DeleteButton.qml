@@ -16,6 +16,7 @@ Rectangle
 
         Image
         {
+            id:img
             anchors.fill: parent
             width: parent.width-5
             height: parent.height-5
@@ -32,11 +33,11 @@ Rectangle
         onEntered:
         {
             showallbtn.color="#cccccc"
-
+img.source="../DicProject/ico/delete2.png"
         }
         onExited:
         {
-
+img.source="../DicProject/ico/delete.png"
           showallbtn.color="#ffffff"
         }
         onClicked:

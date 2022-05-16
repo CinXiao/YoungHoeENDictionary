@@ -111,9 +111,6 @@ void GetBookWord::openbook(QString path)
         p=p.nextSibling();
     }
 
-    //装载完成
-
-    qDebug()<<_words.count();
     _file.close();
 }
 
