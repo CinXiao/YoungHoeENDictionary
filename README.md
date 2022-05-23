@@ -8,6 +8,14 @@
 <img src="https://github.com/CinXiao/YoungHoeENDictionary/blob/main/YoungHoeDictionary%200.5.1/m2.png"><br>
 <img src="https://github.com/CinXiao/YoungHoeENDictionary/blob/main/YoungHoeDictionary%200.5.1/m3.png"><br>
 <img src="https://github.com/CinXiao/YoungHoeENDictionary/blob/main/YoungHoeDictionary%200.5.1/m4.png"><br>
-<a href="https://pan.baidu.com/s/1dsW6zTHZixgYvy3sRxcfZA?pwd=52YH">0.4.2    43.38MB</a><br>
-<a href="https://pan.baidu.com/s/1qfdoq0wdVuuALoYOg4LkGA?pwd=52YH">0.4Basic 35.8MB</a>
+  
+  
+<h2><a href="https://pan.baidu.com/s/1dsW6zTHZixgYvy3sRxcfZA?pwd=52YH">0.4.2    43.38MB</a></h2>
+ <ul>
+ <li>收藏功能开发完毕</li>
+ <ul>
+<h2><a href="https://pan.baidu.com/s/1qfdoq0wdVuuALoYOg4LkGA?pwd=52YH">0.4Basic 35.8MB</a></h2>
+ <ul>
+ <li>基础版本</li>
+ <ul>
 
