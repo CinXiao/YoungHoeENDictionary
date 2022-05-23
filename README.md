@@ -14,8 +14,5 @@
  <ul>
  <li>收藏功能开发完毕</li>
  <ul>
-<h2><a href="https://pan.baidu.com/s/1qfdoq0wdVuuALoYOg4LkGA?pwd=52YH">0.4Basic 35.8MB</a></h2>
- <ul>
- <li>基础版本</li>
- <ul>
+
 
