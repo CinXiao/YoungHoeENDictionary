@@ -1,5 +1,9 @@
 <h1>说明</h1>
 
+<h2><a href="https://pan.baidu.com/s/17Iihp8TTSrnyRaDgRlu0nQ?pwd=h14k">下载 0.6.0      </a>大小：40.18MB</h2>
+<ul>
+ <li>支持中文搜索</li>
+ <ul>
 <h2><a href="https://pan.baidu.com/s/1kIYZ-w95NfKdh_xGSPv0pQ?pwd=lxsv">下载 0.5.1      </a>大小：40.18MB</h2>
 <ul>
  <li>写了学习页面逻辑，现在可以进行阅读和听力的练习</li>
